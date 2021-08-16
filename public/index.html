@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <title>Task one</title>
+    </head>
+    <body>
+        <div>
+            <input
+                type="number"
+                name="Min"
+                id="min"
+                aria-label="Min value for finding prime number"
+            />
+            <input
+                type="number"
+                name="Max"
+                id="max"
+                aria-label="Max value for finding prime number"
+            />
+            <button onclick="showDetails()">show matrix</button>
+            <button onclick="deleteF()">delete</button>
+
+            <h3 id="average"></h3>
+            <h3 id="count"></h3>
+
+            <table onclick="visibility()" style="cursor: pointer">
+                <thead>
+                    <tr>
+                        <th>Prime Numbers</th>
+                        <th>Time Taken (ms)</th>
+                    </tr>
+                </thead>
+                <tbody id="m_body" style="visibility: visible"></tbody>
+            </table>
+
+            <div id="showNumbers"></div>
+        </div>
+
+        <script src="./scripts/primeNumbers.js"></script>
+        <!-- <script src="./scripts/test1.js"></script> -->
+        <script src="./scripts/scripts.js"></script>
+    </body>
+</html>
