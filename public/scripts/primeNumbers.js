@@ -28,14 +28,23 @@ function getPrimeNumberFrom(from, to) {
 
     function timeCalculator(functionToCalculateTime, ...args) {
         // let start_time = process.hrtime(); // node
-        let start_time = window.performance.now(); // browser 1
+        // let start_time = window.performance.now(); // browser 1
         // let start_time = new Date().getTime(); // browser 2
+        performance.mark("start_time");
         let is_prime = functionToCalculateTime(...args);
+        performance.mark("end_time");
+        let time_taken = performance.measure(
+            "measure",
+            "start_time",
+            "end_time"
+        )["duration"];
+        performance.clearMeasures();
+        performance.clearMarks();
         // let time_taken = parseFloat(
         //     (process.hrtime(start_time)[1] / 1000000).toFixed(4)
         // ); // node
 
-        let time_taken = window.performance.now() - start_time; // browser 1
+        // let time_taken = window.performance.now() - start_time; // browser 1
         // let time_taken = new Date().getTime() - start_time; // browser 2
 
         return { is_prime, time_taken };
