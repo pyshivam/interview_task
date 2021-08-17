@@ -1,12 +1,35 @@
 // start 20 to 2000
 // 4000 to 4 lakh
+
+window.arrayOfPrimeNumbers = [2, 3];
+window.maxPrimeLimit = 3;
+
 function getPrimeNumberFrom(from, to) {
-    var arrayOfPrimeNumbers = [2, 3];
+    function updateGlobalList(max) {
+        if (window.maxPrimeLimit < max) {
+            console.log("database updated");
+            for (let index = maxPrimeLimit; index <= max; index++) {
+                if (isPrime(index)) {
+                    arrayOfPrimeNumbers.push(index);
+                }
+            }
+            window.maxPrimeLimit = max;
+        }
+    }
 
     function checkFromArray(number) {
-        return arrayOfPrimeNumbers.find((v) => {
-            return number % v === 0;
-        });
+        const sqrt = Math.round(Math.sqrt(number));
+        for (let index = 0; index < arrayOfPrimeNumbers.length; index++) {
+            const v = arrayOfPrimeNumbers[index];
+            if (v <= sqrt) {
+                if (number % v === 0) {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     // done: approved
@@ -14,12 +37,15 @@ function getPrimeNumberFrom(from, to) {
         let stepOne = false;
         let stepTwo = false;
 
+        if (number < 3) {
+            return true;
+        }
+
         if (number % 2 != 0 && number % 3 != 0) {
             stepOne = true;
         }
 
-        if (checkFromArray(number) == undefined) {
-            arrayOfPrimeNumbers.push(number);
+        if (checkFromArray(number) == false) {
             stepTwo = true;
         }
 
@@ -53,9 +79,7 @@ function getPrimeNumberFrom(from, to) {
     let prime_numbers = [];
     let total_time = 0.0;
 
-    for (let index = 4; index < from; index++) {
-        isPrime(index);
-    }
+    updateGlobalList(to);
 
     for (let index = from; index < to; index++) {
         const { is_prime, time_taken } = timeCalculator(isPrime, index);
